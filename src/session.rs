@@ -25,8 +25,17 @@ pub struct Qr {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct SessionToken(String);
+
+impl<'a> Into<&'a str> for &'a SessionToken {
+    fn into(self) -> &'a str {
+        &self.0
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct SessionPackage {
     #[serde(rename = "sessionPtr")]
     pub session_ptr: Qr,
-    pub token: String,
+    pub token: SessionToken,
 }
