@@ -23,7 +23,7 @@ fn main() {
 
     let res = client
         .request(&dr)
-        .and_then(move |r| client.cancel(&r.token));
+        .and_then(move |r| client.result(&r.token));
     /*.map(|resp| {
         println!("status: {:?}", resp);
 

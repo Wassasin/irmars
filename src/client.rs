@@ -41,4 +41,19 @@ impl Client {
                 Ok(())
             })
     }
+
+    pub fn result(
+        &self,
+        token: &SessionToken,
+    ) -> impl Future<Item = SessionResult, Error = ClientError> {
+        let token: &str = token.into();
+        self.client
+            .get(
+                self.create_url("/session/")
+                    .join(&format!("{}/result", token))
+                    .unwrap(),
+            )
+            .send()
+            .and_then(|mut resp| resp.json::<SessionResult>())
+    }
 }

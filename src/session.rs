@@ -39,3 +39,13 @@ pub struct SessionPackage {
     pub session_ptr: Qr,
     pub token: SessionToken,
 }
+
+// https://godoc.org/github.com/privacybydesign/irmago/server#SessionResult
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SessionResult {
+    token: SessionToken,
+    status: SessionStatus,
+    #[serde(rename = "type")]
+    stype: SessionType,
+    //
+}
