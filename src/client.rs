@@ -1,7 +1,9 @@
-use super::*;
 use futures::future::Future;
 use reqwest::r#async::ClientBuilder;
 use reqwest::Url;
+
+use crate::request::*;
+use crate::session::*;
 
 pub struct Client {
     baseurl: String,
