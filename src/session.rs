@@ -54,7 +54,7 @@ pub struct Qr {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct SessionToken(String);
+pub struct SessionToken(pub String);
 
 impl<'a> Into<&'a str> for &'a SessionToken {
     fn into(self) -> &'a str {
@@ -71,10 +71,10 @@ pub struct SessionPackage {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct DisclosedAttribute {
-    rawvalue: Option<String>,
-    value: BTreeMap<String, String>,
-    id: String,
-    status: AttributeProofStatus,
+    pub rawvalue: Option<String>,
+    pub value: BTreeMap<String, String>,
+    pub id: String,
+    pub status: AttributeProofStatus,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
