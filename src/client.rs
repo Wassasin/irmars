@@ -31,6 +31,7 @@ impl Client {
             .post(self.create_url("/session"))
             .json(dr)
             .send()
+            .and_then(|resp| resp.error_for_status())
             .and_then(|mut resp| resp.json::<SessionPackage>())
     }
 
@@ -38,6 +39,7 @@ impl Client {
         self.client
             .delete(self.create_url("/session/").join(token.into()).unwrap())
             .send()
+            .and_then(|resp| resp.error_for_status())
             .and_then(|resp| {
                 resp.error_for_status()?;
                 Ok(())
@@ -56,6 +58,7 @@ impl Client {
                     .unwrap(),
             )
             .send()
+            .and_then(|resp| resp.error_for_status())
             .and_then(|mut resp| resp.json::<SessionResult>())
     }
 }
