@@ -1,8 +1,13 @@
 [package]
-name = "irmars"
-version = "0.1.0"
+name = "irma"
+description = "A client library for IRMA, a privacy-friendly identity platform for both authentication and signing"
+version = "0.0.0"
 authors = ["Wouter Geraedts <git@woutergeraedts.nl>"]
 edition = "2018"
+repository = "https://github.com/wassasin/irmars"
+keywords = ["authentication", "signing"]
+categories = ["authentication"]
+license = "MIT"
 
 [dependencies]
 jsonwebtoken = "6"
