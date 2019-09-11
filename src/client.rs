@@ -10,10 +10,11 @@ pub struct Client {
     client: reqwest::r#async::Client,
 }
 
-pub type ClientError = reqwest::Error;
+pub type Error = reqwest::Error;
+pub type StatusCode = reqwest::StatusCode;
 
 impl Client {
-    pub fn new(baseurl: String) -> Result<Client, reqwest::Error> {
+    pub fn new(baseurl: String) -> Result<Client, Error> {
         let client = ClientBuilder::new().build().unwrap();
 
         Ok(Client { baseurl, client })
@@ -26,7 +27,7 @@ impl Client {
     pub fn request(
         &self,
         dr: &DisclosureRequest,
-    ) -> impl Future<Item = SessionPackage, Error = ClientError> {
+    ) -> impl Future<Item = SessionPackage, Error = Error> {
         self.client
             .post(self.create_url("/session"))
             .json(dr)
@@ -35,7 +36,7 @@ impl Client {
             .and_then(|mut resp| resp.json::<SessionPackage>())
     }
 
-    pub fn cancel(&self, token: &SessionToken) -> impl Future<Item = (), Error = ClientError> {
+    pub fn cancel(&self, token: &SessionToken) -> impl Future<Item = (), Error = Error> {
         self.client
             .delete(self.create_url("/session/").join(token.into()).unwrap())
             .send()
@@ -46,10 +47,7 @@ impl Client {
             })
     }
 
-    pub fn result(
-        &self,
-        token: &SessionToken,
-    ) -> impl Future<Item = SessionResult, Error = ClientError> {
+    pub fn result(&self, token: &SessionToken) -> impl Future<Item = SessionResult, Error = Error> {
         let token: &str = token.into();
         self.client
             .get(
