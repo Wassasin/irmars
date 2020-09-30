@@ -10,8 +10,8 @@ categories = ["authentication"]
 license = "MIT"
 
 [dependencies]
-jsonwebtoken = "6"
+jsonwebtoken = "7"
 reqwest = { version = "0.9", features = ["rustls-tls"], default-features = false }
-serde = "1.0.99"
-serde_json = "1.0.40"
-futures = "0.1.28"
+serde = "1.0"
+serde_json = "1.0"
+futures = "0.1"
