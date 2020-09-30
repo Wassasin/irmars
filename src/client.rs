@@ -29,7 +29,7 @@ impl Client {
         dr: &DisclosureRequest,
     ) -> impl Future<Item = SessionPackage, Error = Error> {
         self.client
-            .post(self.create_url("/session"))
+            .post(self.create_url("session"))
             .json(dr)
             .send()
             .and_then(|resp| resp.error_for_status())
@@ -38,7 +38,7 @@ impl Client {
 
     pub fn cancel(&self, token: &SessionToken) -> impl Future<Item = (), Error = Error> {
         self.client
-            .delete(self.create_url("/session/").join(token.into()).unwrap())
+            .delete(self.create_url("session/").join(token.into()).unwrap())
             .send()
             .and_then(|resp| resp.error_for_status())
             .and_then(|resp| {
@@ -51,7 +51,7 @@ impl Client {
         let token: &str = token.into();
         self.client
             .get(
-                self.create_url("/session/")
+                self.create_url("session/")
                     .join(&format!("{}/result", token))
                     .unwrap(),
             )
