@@ -438,7 +438,7 @@ dependencies = [
 
 [[package]]
 name = "irma"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "futures 0.1.29 (registry+https://github.com/rust-lang/crates.io-index)",
  "jsonwebtoken 7.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
